@@ -1,9 +1,13 @@
+import "./style.css";
+import * as THREE from "three";
 const canvas = document.querySelector(".webgl");
 
 const scene = new THREE.Scene();
 const geometry = new THREE.BoxGeometry(1, 1, 1);
 const material = new THREE.MeshBasicMaterial({ color: "red" });
 const cube = new THREE.Mesh(geometry, material);
+cube.position.z = 1;
+console.log("made it here");
 
 scene.add(cube);
 
