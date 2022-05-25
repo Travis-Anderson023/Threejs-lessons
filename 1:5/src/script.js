@@ -10,11 +10,19 @@ const scene = new THREE.Scene();
 /**
  * Objects
  */
-const geometry = new THREE.BoxGeometry(1, 1, 1);
+const capGroup = new THREE.Group();
+scene.add(capGroup);
+
+const geometry = new THREE.CapsuleGeometry(1, 2, 4, 8);
 const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-const mesh = new THREE.Mesh(geometry, material);
-scene.add(mesh);
-mesh.position.y = 1;
+const capsule1 = new THREE.Mesh(geometry, material);
+
+const capsule2 = new THREE.Mesh(geometry, material);
+capsule2.rotation.z = Math.PI * 0.5;
+
+capGroup.add(capsule1);
+capGroup.add(capsule2);
+capGroup.rotation.z = Math.PI * 0.25;
 
 /**
  * Sizes
@@ -28,17 +36,12 @@ const sizes = {
  * Camera
  */
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height);
-camera.position.z = 3;
+camera.position.z = 10;
 scene.add(camera);
-mesh.position.set(1, 1, 1);
-const axesHelper = new THREE.AxesHelper();
-scene.add(axesHelper);
-axesHelper.rotation.x = 0.01;
 /**
  * Renderer
  */
 
-mesh.scale.x = 2;
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
 });
